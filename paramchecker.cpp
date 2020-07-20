@@ -30,9 +30,9 @@ bool respRateOk(float respRate)
 bool vitalsAreOk(float bpm, float spo2, float respRate)
 {
     bool ret = bmpOk(bpm);
-    if (!ret)
+    if (ret)
         ret = spoOk(spo2);
-    if (!ret)
+    if (ret)
         ret = respRateOk(respRate);
     return ret;
 }
