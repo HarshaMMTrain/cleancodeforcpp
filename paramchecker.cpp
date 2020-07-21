@@ -1,38 +1,43 @@
 
+class paramValidator
+{
+public:
+    paramValidator(float lower = -1, float upper = -1) : min(lower), max(upper) { }
+    virtual ~paramValidator() { };
+    
+    bool paramOk(float param)
+    {
+        return (upperLimitOk(param) && lowerLimitOk(param));
+    };
+protected:
+    float min;
+    float max;
+
+    bool upperLimitOk(float param) { return ((-1 == max) || (param <= max)); }
+    bool lowerLimitOk(float param) { return ((-1 == min) || (param >= min)); }
+};
+
+
+
 bool bmpOk(float bpm)
 {
-  bool ret = true;
-  if(bpm < 70 || bpm > 150) {
-      ret = false;
-  }
-  return ret;
+    paramValidator bpmValidator(70, 150);
+    return bpmValidator.paramOk(bpm);
 }
 
 bool spoOk(float spo2)
 {
-  bool ret = true;
-  if(spo2 < 80) {
-      ret = false;
-  }
-  return ret;
+    paramValidator spoValidator(80, -1);
+    return spoValidator.paramOk(spo2);
 }
 
 bool respRateOk(float respRate)
 {
-    bool ret = true;
-    if(respRate < 30 || respRate > 60)
-    {
-        ret = false;
-    }
-    return ret;
+    paramValidator respValidator(30, 60);
+    return respValidator.paramOk(respRate);
 }
 
 bool vitalsAreOk(float bpm, float spo2, float respRate)
 {
-    bool ret = bmpOk(bpm);
-    if (ret)
-        ret = spoOk(spo2);
-    if (ret)
-        ret = respRateOk(respRate);
-    return ret;
+    return (bmpOk(bpm) && spoOk(spo2) && respRateOk(respRate));
 }
