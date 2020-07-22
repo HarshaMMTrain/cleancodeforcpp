@@ -1,6 +1,5 @@
 #include "paramchecker.h"
 #include <gtest/gtest.h>
-#include <errno.h>
 #include <vector>
 
 TEST(VitalsTest, BPM) { 
@@ -31,7 +30,7 @@ TEST(VitalsTest, UNKNOWN) {
                                     {"uknown", 60}};
     std::vector<struct vitalParam> vitalArray(paramArr,
                                               paramArr + (sizeof paramArr / sizeof (struct vitalParam)) );
-    ASSERT_EQ(-ENOTSUP, vitalsOk(vitalArray));
+    ASSERT_EQ(-1, vitalsOk(vitalArray));
     
 }
 

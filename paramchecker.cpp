@@ -1,11 +1,10 @@
 #include "paramchecker.h"
 #include "vitalsdb.hpp"
-#include <errno.h>
 #include <iostream>
 
 static int vitalOk(IVital *vital, float value)
 {
-    int ret = -ENOTSUP;
+    int ret = -1;
     if (NULL != vital)
         ret = (int)(!vital->paramOk(value));
     return ret;
