@@ -2,7 +2,7 @@
 #include "vitalsdb.hpp"
 
 
-dbregister::dbregister(const std::string vitalName, IVallocator *vitalAlloc)
+dbregister::dbregister(const std::string &&vitalName, IVallocator *vitalAlloc)
 {
     vitalsdb *pDb = vitalsdb::getvitalsdb();
     if (nullptr != pDb)

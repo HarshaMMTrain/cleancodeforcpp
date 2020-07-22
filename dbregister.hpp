@@ -17,7 +17,7 @@ public:
 class dbregister
 {
 public:
-    dbregister(const std::string vitalName, IVallocator *vitalAlloc);
+    dbregister(const std::string &&vitalName, IVallocator *vitalAlloc);
     virtual ~dbregister() { }
 };
 
