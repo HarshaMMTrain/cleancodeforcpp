@@ -16,7 +16,7 @@ int vitalsOk(std::vector<struct vitalParam> &vitalsArray)
     vitalsdb* pDb = vitalsdb::getvitalsdb();
     std::vector<struct vitalParam>::iterator iter = vitalsArray.begin();
 
-    for (;(iter != vitalsArray.end()) && (ret == 0); iter++)
+    for (;(iter != vitalsArray.end()) && (ret == 0); ++iter)
     {
         IVital *pVital = pDb->getVital(iter->name);
         ret = vitalOk(pVital, iter->value);
