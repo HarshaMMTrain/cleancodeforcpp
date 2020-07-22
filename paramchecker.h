@@ -6,6 +6,15 @@ struct vitalParam
     std::string name;
     float value;
 };
+
+struct vitalResult
+{
+    std::string name;
+    bool vOk;
+};
+
 int vitalsOk(std::vector<struct vitalParam> &vitalsArray);
 
-bool vitalsAreOk(float bpm, float spo2, float respRate);
+int vitalsOkEx(std::vector<struct vitalParam> &vitalsArray,
+               std::vector<struct vitalResult> *vResult);
+

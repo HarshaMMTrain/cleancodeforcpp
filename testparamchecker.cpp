@@ -31,7 +31,6 @@ TEST(VitalsTest, UNKNOWN) {
     std::vector<struct vitalParam> vitalArray(paramArr,
                                               paramArr + (sizeof paramArr / sizeof (struct vitalParam)) );
     ASSERT_EQ(-1, vitalsOk(vitalArray));
-    
 }
 
 
@@ -43,6 +42,21 @@ TEST(VitalsTest, NEGATIVE1) {
                                               paramArr + (sizeof paramArr / sizeof (struct vitalParam)) );
     ASSERT_LE(0, vitalsOk(vitalArray));
 }
+
+TEST(VitalsTest, EXTENDED) {
+    struct vitalParam paramArr[] = {{"bpm", 100},
+                                    {"spo", 10},
+                                    {"resp", 50}};
+    std::vector<struct vitalParam> vitalArray(paramArr,
+                                              paramArr + (sizeof paramArr / sizeof (struct vitalParam)) );
+    std::vector<struct vitalResult> vResult;
+    int ret = vitalsOkEx(vitalArray, &vResult);
+    ASSERT_LE(0, ret);
+    ASSERT_EQ(true, vResult[0].vOk);
+    ASSERT_EQ(false, vResult[1].vOk);
+    ASSERT_EQ(true, vResult[0].vOk);
+}
+
 
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
